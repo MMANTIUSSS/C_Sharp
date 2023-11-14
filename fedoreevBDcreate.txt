@@ -1,0 +1,84 @@
+create table products
+(
+	id SERIAL PRIMARY KEY,
+	name CHARACTER VARYING(40),
+	price REAL,	
+	amount INTEGER
+);
+create table users
+(
+	id SERIAL PRIMARY KEY,
+	name CHARACTER VARYING(40),
+	password CHARACTER VARYING(40),
+	permissions CHARACTER VARYING(40)
+);
+create table clients
+(
+	id SERIAL PRIMARY KEY,
+	name CHARACTER VARYING(40),
+	phone_number CHARACTER VARYING(40),
+	address CHARACTER VARYING(80)
+);
+create table contract
+(
+	id SERIAL PRIMARY KEY,
+	id_client INTEGER,
+	date DATE,
+	pre_pay BOOLEAN
+);
+create table contracts_bond
+(
+	id SERIAL PRIMARY KEY,
+	id_contract INTEGER,
+	id_product INTEGER,
+	amount INTEGER
+);
+create table delivery
+(
+	id SERIAL PRIMARY KEY,
+	id_contract INTEGER,
+	id_product INTEGER,
+	amount INTEGER,
+	date DATE
+);
+INSERT INTO users (name, password, permissions) VALUES ('admin', '1156371652', 'admin');
+
+INSERT INTO products (name, price, amount) VALUES ('Металл. труба 4х4,2 1м', 260.5, 100);
+INSERT INTO products (name, price, amount) VALUES ('Металл. труба 16х16,4 1м', 560.1, 120);
+INSERT INTO products (name, price, amount) VALUES ('Металл. уголок 5х5 1м', 142.4, 60);
+INSERT INTO products (name, price, amount) VALUES ('Металл. уголок 12х12 1м', 180.5, 100);
+INSERT INTO products (name, price, amount) VALUES ('Уровень', 499.9, 40);
+
+INSERT INTO clients (name, phone_number, address) VALUES ('Музыкант', '79648774343', 'ул.Пушкина д.Калатушкина 1');
+INSERT INTO clients (name, phone_number, address) VALUES ('Ноунейм', '79648785544', 'ул.Пушкина д.Калатушкина 2');
+INSERT INTO clients (name, phone_number, address) VALUES ('КАМЕНЩИК', '232-44-56', 'ул.Пушкина д.Калатушкина 3');
+
+INSERT INTO contract (id_client, date, pre_pay) VALUES (1, '2022-08-8', true);
+INSERT INTO contract (id_client, date, pre_pay) VALUES (1, '2022-08-12', false);
+INSERT INTO contract (id_client, date, pre_pay) VALUES (2, '2022-07-16', true);
+INSERT INTO contract (id_client, date, pre_pay) VALUES (2, '2022-07-28', false);
+INSERT INTO contract (id_client, date, pre_pay) VALUES (3, '2022-08-10', true);
+INSERT INTO contract (id_client, date, pre_pay) VALUES (3, '2022-08-12', false);
+
+INSERT INTO contracts_bond (id_contract, id_product, amount) VALUES (1, 1, 10);
+INSERT INTO contracts_bond (id_contract, id_product, amount) VALUES (1, 2, 8);
+INSERT INTO contracts_bond (id_contract, id_product, amount) VALUES (1, 5, 1);
+INSERT INTO contracts_bond (id_contract, id_product, amount) VALUES (2, 1, 16);
+INSERT INTO contracts_bond (id_contract, id_product, amount) VALUES (2, 3, 20);
+INSERT INTO contracts_bond (id_contract, id_product, amount) VALUES (2, 4, 1);
+INSERT INTO contracts_bond (id_contract, id_product, amount) VALUES (2, 5, 1);
+INSERT INTO contracts_bond (id_contract, id_product, amount) VALUES (3, 5, 2);
+INSERT INTO contracts_bond (id_contract, id_product, amount) VALUES (4, 1, 23);
+INSERT INTO contracts_bond (id_contract, id_product, amount) VALUES (4, 3, 32);
+INSERT INTO contracts_bond (id_contract, id_product, amount) VALUES (4, 4, 1);
+INSERT INTO contracts_bond (id_contract, id_product, amount) VALUES (5, 5, 1);
+INSERT INTO contracts_bond (id_contract, id_product, amount) VALUES (5, 3, 13);
+INSERT INTO contracts_bond (id_contract, id_product, amount) VALUES (5, 4, 18);
+INSERT INTO contracts_bond (id_contract, id_product, amount) VALUES (6, 4, 28);
+
+INSERT INTO delivery (id_contract, id_product, amount, date) VALUES (1, 1, 10, '2022-08-8');
+INSERT INTO delivery (id_contract, id_product, amount, date) VALUES (1, 2, 8, '2022-08-9');
+INSERT INTO delivery (id_contract, id_product, amount, date) VALUES (1, 5, 1, '2022-08-8');
+INSERT INTO delivery (id_contract, id_product, amount, date) VALUES (3, 5, 2, '2022-07-16');
+INSERT INTO delivery (id_contract, id_product, amount, date) VALUES (5, 5, 1, '2022-08-10');
+INSERT INTO delivery (id_contract, id_product, amount, date) VALUES (5, 3, 13, '2022-08-11');
